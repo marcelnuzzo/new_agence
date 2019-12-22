@@ -1,15 +1,25 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class = "jumbotron">
+        <div style="text-align:center">
+            <h1>Register</h1>
+        </div>
+    </div>
+    
+    <div class="container">
+        <a href="{{ path('home') }}" class="btn btn-info">Retour au menu principale</a> 
+        <hr>
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.agreeTerms) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            <button class="btn">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}

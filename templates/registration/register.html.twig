@@ -12,14 +12,14 @@
     </div>
     
     <div class="container">
-        <a href="{{ path('home') }}" class="btn btn-info">Retour au menu principale</a> 
+        <a href="{{ path('home') }}" class="btn btn-warning">Retour au menu principale</a> 
         <hr>
         {{ form_start(registrationForm) }}
             {{ form_row(registrationForm.email) }}
             {{ form_row(registrationForm.plainPassword) }}
             {{ form_row(registrationForm.agreeTerms) }}
-
-            <button class="btn">Register</button>
+            </br>
+            <button class="btn btn-info">Register</button>
         {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

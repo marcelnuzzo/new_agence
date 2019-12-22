@@ -1,0 +1,29 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Liste des users!{% endblock %}
+
+{% block body %}
+
+<div class = "jumbotron">
+    <h1 style="text-align:center"><mark>Users</mark></h1>
+    <a href="{{ path('home') }}" class="btn btn-info">Retour au menu principale</a> 
+</div>
+<a class="btn btn-warning" style="color:white" href="{{ path('admin_createUser') }}" role="button" >Créer</a>
+<hr>
+<table class="table table-striped table-bordered table-hover">
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Password</th>
+    </tr>
+    {%for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.password }}</td>
+            <td><a class="btn btn-info" style="color:white" href="{{ path('admin_editUser', {'id':user.id}) }}" role="button" >Modifier</a></td>
+            <td><a class="btn btn-danger" style="color:white" href="{{ path('admin_deleteUser', {'id':user.id}) }} " role="button" >Supprimer</a></td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
     <head>
          <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,17 +52,36 @@
                     <a class="nav-link" href="{{ path('app_logout') }} ">Logout</a>
                 </li>
                 {% endif %}
-                {% if is_granted('ROLE_USER') %}
+                {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#" target="blank" tabindex="-1" aria-disabled="true">Admin</a>
+                    <a class="nav-link" href="{{ path('easyadmin') }}" target="blank" tabindex="-1" aria-disabled="true">Admin</a>
                 </li>
+                {% endif %}
+                {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('admin_index') }} ">Index admin</a>
                 </li>
                 {% endif %}
             </ul>
         </nav>
-        {% block body %}{% endblock %}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success" style="text-align:center">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('warning') %}
+            <div class="alert alert-warning" style="text-align:center;color:#000000">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger" style="text-align:center;color:#000000">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
     <!-- Footer -->

@@ -59,6 +59,7 @@ class AdminController extends AbstractController
         
         
         $form = $this->createFormBuilder($user)
+                     ->add('username')
                      ->add('email')
                      ->add('password', PasswordType::class)
                      ->getForm();

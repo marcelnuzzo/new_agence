@@ -14,6 +14,7 @@
     {% endif %}
 
     {{ form_start(formUser) }}   
+    {{ form_row(formUser.username, {'attr': {'placeholder': "Email"}}) }}
     {{ form_row(formUser.email, {'attr': {'placeholder': "Email"}}) }}
     {{ form_row(formUser.password, {'attr': {'placeholder': "Mot de passe"}}) }}
 

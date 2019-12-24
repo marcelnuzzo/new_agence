@@ -17,7 +17,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): Response
+    public function register(\Swift_Mailer $mailer,Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -35,6 +35,17 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail();
+
+            $message = (new \Swift_Message('Agence3'))
+                        ->setFrom('nuzzomarcel358@gmail.com')
+                        ->setTo('nuzzo.marcel@aliceadsl.fr')
+                        ->setBody($body,
+                                'text/html'
+                            );
+            $mailer->send($message);
+            $this->addFlash('success', 'Votre compte à bien été enregistré.');
 
             // do anything else you need here, like send an email
             

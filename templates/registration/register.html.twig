@@ -7,18 +7,16 @@
 {% block body %}
     <div class = "jumbotron">
         <div style="text-align:center">
-            <h1>Register</h1>
+            <h1>Inscription</h1>
         </div>
     </div>
     
     <div class="container">
-        <a href="{{ path('home') }}" class="btn btn-warning">Retour au menu principale</a> 
-        <hr>
         {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.username) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword) }}
-            {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_row(registrationForm.username, {'attr': {'placeholder': "Nom de l'utilisateur"}} ) }}
+            {{ form_row(registrationForm.email, {'attr': {'placeholder': "Email de l'utilisateur"}} ) }}
+            {{ form_row(registrationForm.plainPassword, {'attr': {'placeholder': "Mot de passe de l'utilisateur"}} ) }}
+            {{ form_row(registrationForm.agreeTerms, {'attr': {'label': "Se rappeler de moi"}} ) }}
             </br>
             <button class="btn btn-info">Register</button>
         {{ form_end(registrationForm) }}

@@ -3,28 +3,17 @@
 {% form_theme formUser 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-    {% if editMode %}
+   
         <div class="jumbotron" style="background-color:orange">
-            <h1 style ="text-align:center">Modification d'un user</h1>
+            <h1 style ="text-align:center">Modification du user</h1>
         </div>                
-    {% else %}
-        <div class="jumbotron" style="background-color:cyan">
-            <h1 style ="text-align:center">Création d'un user</h1>
-        </div>
-    {% endif %}
 
     {{ form_start(formUser) }}   
     {{ form_row(formUser.username, {'attr': {'placeholder': "Email"}}) }}
     {{ form_row(formUser.email, {'attr': {'placeholder': "Email"}}) }}
     {{ form_row(formUser.password, {'attr': {'placeholder': "Mot de passe"}}) }}
 
-    <button type="submit" class="btn btn-success">
-    {% if editMode %}
-        Modifier
-    {% else %}
-        Ajouter le user
-    {% endif %}
-    </button>
+    <button type="submit" class="btn btn-success">Modifier</button>
     
     {{ form_end(formUser) }}
     

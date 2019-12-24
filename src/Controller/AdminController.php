@@ -41,22 +41,10 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/newUser", name="admin_createUser")
      * @Route("/admin/editUser/{id}", name="admin_editUser")
      */
     public function formUser( \Swift_Mailer $mailer,  Request $request, EntityManagerInterface $manager, User $user, UserPasswordEncoderInterface $encoder, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): response
     {
-        $currentRoute = $request->attributes->get('_route');
-        $route = "admin/createUser";
-        if($currentRoute == "admin/newUser")
-            $route = "admin_createUser";
-        else if($currentRoute == "admin/editUser/{id}")
-            $route = "admin_editUser";
-
-        if(!$user) {
-            $user = new User();
-        }
-        
         
         $form = $this->createFormBuilder($user)
                      ->add('username')
@@ -71,37 +59,29 @@ class AdminController extends AbstractController
 
             $user->setPassword($hash);
             
-            if(!$user->getId()) {
-                $editMode = 0;
-                $this->addFlash('success', 'User créé');
-            }
-            else {
-                $editMode = 1;
-                $this->addFlash('success', 'User modifié');
-            }
+            $this->addFlash('success', 'User modifié');
+            
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);         
             $manager->flush();
-            //$this->addFlash('success', 'Bien créé');
             
-            $body="Email : ".$user->getEmail();
+            $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail();
 
-            $message = (new \Swift_Message('Hello Email'))
+            $message = (new \Swift_Message('Agence3'))
                         ->setFrom('nuzzomarcel358@gmail.com')
                         ->setTo('nuzzo.marcel@aliceadsl.fr')
                         ->setBody($body,
                                 'text/html'
                             );
             $mailer->send($message);
-            $this->addFlash('success', 'Votre compte à bien été enregistré.');
+            $this->addFlash('warning', 'Votre compte à bien été modifié.');
 
-            return $this->redirectToRoute('admin_index');
+            return $this->redirectToRoute('home');
         }
         
         $html = ".html.twig";
-        return $this->render($route.$html, [
+        return $this->render('admin/admin_editUser'.$html, [
             'formUser' => $form->createView(),
-            'editMode' => $user->getId() !== null
         ]);
         
     }

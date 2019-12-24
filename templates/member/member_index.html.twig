@@ -9,12 +9,11 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/symfony/agence3/src/Controller/MemberController.php'|file_link(0) }}">src/Controller/MemberController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/symfony/agence3/templates/member/index.html.twig'|file_link(0) }}">templates/member/index.html.twig</a></code></li>
-    </ul>
+    <h1>Bonjour {{ user.username }}</h1>
+    <hr>
+    <p>Id : {{ user.id }}</p>
+    <p>Nom d'utilisateur : {{ user.username }}</p>
+    <p>Email : {{ user.email }}</p>
+    <p>Role : {{ role.0 }}</p>
 </div>
 {% endblock %}

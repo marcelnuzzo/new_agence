@@ -12,12 +12,8 @@
         <ul>
             <li>
                 <h2>{{ user.username }}</h2>
-                <h3>{{user.email}}</h3>
-                {% if user.username == 'marcel' %}
-                    <p>Role admin</p>
-                {% else %}
-                    <p>Role user</p>
-                {% endif %}
+                <h3>{{ user.email }}</h3>
+                {{ user.roles[0] }}
             </li>
         </ul>
     <hr>

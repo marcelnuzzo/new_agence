@@ -109,27 +109,19 @@ class AdminController extends AbstractController
         
         $repo = $this->getDoctrine()->getRepository(User::class);
         $users = $repo->findAll();
-      
-    $role = ['ROLE_ADMIN'];
     
     $user = $this->getUser();
     
-    if($user->getId() == 1)
-        $role = ['ROLE_ADMIN'];
-    else
-        $role = ['ROLE_USER'];
-    
-    //dd($user->getId());
-    
-    $user->setRoles($role);
-    
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($user);
-    $em->flush();
+    $roles = $user->getRoles();
+    $toto = $roles[0];
+    //dd($toto);
     
     return $this->render('admin/admin_ajouteRole.html.twig', [
         'controller_name' => 'adminController',
-        'users' => $users
+        'users' => $users,
+        'user' => $user,
+        'roles' => $roles,
+        'toto' => $toto
     ]);
     }
 }

@@ -101,5 +101,35 @@ class AdminController extends AbstractController
        
     }
 
-
+    /**
+    * @Route("/admin/ajouteRole", name="admin_ajouteRole")
+    */
+    public function ajoutRole(EntityManagerInterface $em)
+    {
+        
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        $users = $repo->findAll();
+      
+    $role = ['ROLE_ADMIN'];
+    
+    $user = $this->getUser();
+    
+    if($user->getId() == 1)
+        $role = ['ROLE_ADMIN'];
+    else
+        $role = ['ROLE_USER'];
+    
+    //dd($user->getId());
+    
+    $user->setRoles($role);
+    
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($user);
+    $em->flush();
+    
+    return $this->render('admin/admin_ajouteRole.html.twig', [
+        'controller_name' => 'adminController',
+        'users' => $users
+    ]);
+    }
 }

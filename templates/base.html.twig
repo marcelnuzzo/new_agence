@@ -56,10 +56,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('easyadmin') }}" target="blank" tabindex="-1" aria-disabled="true">Admin</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_index') }} ">Index admin</a>
+                </li>
                 {% endif %}
                 {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('admin_index') }} ">Index admin</a>
+                    <a class="nav-link" href="{{ path('member_index') }} ">Vôtre compte</a>
                 </li>
                 {% endif %}
             </ul>

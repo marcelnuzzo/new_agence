@@ -5,10 +5,9 @@
 {% block body %}
 
 <div class = "jumbotron">
-    <h1 style="text-align:center"><mark>Les utilisateurs</mark></h1>
-</div> 
+    <h1 style="text-align:center"><mark>Les utilisateurs</mark></h1> 
     <a href="{{ path('home') }}" class="btn btn-info">Retour au menu principale</a> 
-
+</div>
     {%for user in users %}   
         <ul>
             <li>

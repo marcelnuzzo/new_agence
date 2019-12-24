@@ -45,7 +45,7 @@ class RegistrationController extends AbstractController
                                 'text/html'
                             );
             $mailer->send($message);
-            $this->addFlash('success', 'Votre compte à bien été enregistré.');
+            $this->addFlash('success', 'Votre compte à bien été enregistré, un mail de confirmation vous sera envoyé dans les plus bref délais.');
 
             // do anything else you need here, like send an email
             
@@ -55,6 +55,7 @@ class RegistrationController extends AbstractController
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
+            
         }
 
         return $this->render('registration/register.html.twig', [

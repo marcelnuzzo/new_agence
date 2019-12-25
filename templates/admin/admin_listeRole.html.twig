@@ -8,12 +8,14 @@
     <h1 style="text-align:center"><mark>Les utilisateurs</mark></h1> 
     <a href="{{ path('home') }}" class="btn btn-info">Retour au menu principale</a> 
 </div>
+    <h1>{{ user | length }} utilisateurs</h1>
     {%for user in users %}   
         <ul>
             <li>
                 <h2>{{ user.username }}</h2>
                 <h3>{{ user.email }}</h3>
                 {{ user.roles[0] }}
+                <td><a class="btn btn-info" style="color:white" href="{{ path('admin_editRole', {'id':user.id}) }}" role="button" >Modifier</a></td>
             </li>
         </ul>
     <hr>

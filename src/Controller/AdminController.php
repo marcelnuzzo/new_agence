@@ -9,10 +9,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdminController extends AbstractController
 {
@@ -102,26 +105,59 @@ class AdminController extends AbstractController
     }
 
     /**
-    * @Route("/admin/ajouteRole", name="admin_ajouteRole")
+    * @Route("/admin/listeRole", name="admin_listeRole")
     */
-    public function ajoutRole(EntityManagerInterface $em)
+    public function listeRole()
     {
         
         $repo = $this->getDoctrine()->getRepository(User::class);
         $users = $repo->findAll();
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        $user = $repo->findAll();
     
-    $user = $this->getUser();
-    
-    $roles = $user->getRoles();
-    $toto = $roles[0];
-    //dd($toto);
-    
-    return $this->render('admin/admin_ajouteRole.html.twig', [
-        'controller_name' => 'adminController',
-        'users' => $users,
-        'user' => $user,
-        'roles' => $roles,
-        'toto' => $toto
-    ]);
+        return $this->render('admin/admin_listeRole.html.twig', [
+            'controller_name' => 'adminController',
+            'users' => $users,
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/admin/editRole/{id}", name="admin_editRole")
+     */
+    public function editRole(User $user, Request $request, EntityManagerInterface $manager) 
+    {
+        $form = $this->createFormBuilder($user)
+            ->add('roles', CollectionType::class, [
+                'entry_type'   => ChoiceType::class,
+                'entry_options'  => [
+                    'label' => false,
+                    'choices' => [
+                        'Admin' => 'ROLE_ADMIN',
+                        'Super' => 'ROLE_SUPER_ADMIN',
+                        'User' => 'ROLE_USER'
+                    ],
+                ],
+            ])
+            ->getForm();
+
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()) {
+                $manager->persist($user);         
+                $manager->flush();
+                return $this->redirectToRoute('admin_listeRole',['id' => $user->getId()
+                ]);
+            }
+       
+        return $this->render('admin/admin_editRole.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => User::class,
+        ]);
     }
 }

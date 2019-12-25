@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+ 
+{% block body %}
+
+    <div class="jumbotron" style="background-color:orange">
+        <h1 style ="text-align:center">Modification du role</h1>
+    </div>
+ 
+    {{ form_start(form) }}
+ 
+    {{ form_row(form.roles) }}
+    
+    <button type="submit">Register!</button>
+ 
+    {{ form_end(form) }}
+ 
+{% endblock %}

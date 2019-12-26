@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -14,9 +13,7 @@ class MemberController extends AbstractController
     public function member_index()
     {
         
-        $user = $this->getUser();
-        $user->getId();
-        
+        $user = $this->getUser();      
         $role = $user->getRoles();
         
         return $this->render('member/member_index.html.twig', [

@@ -11,30 +11,41 @@
 <div class="container-fluid">
 <h1 style="text-align:center;background-color:yellow">{{ product | length }} produits :</h1> 
     <div class="row">
-        <div class="col-6">
+        <div class="col-2">
             <h5><strong>Titre :</strong></h5>
+        </div>
+        <div class="col-3">
+            <h5><strong>lien PDF :</strong></h5>
         </div>
         <div class="col-3">
             <h5><strong>PDF :</strong></h5>
         </div>
-        <div class="col-3">
+         <div class="col-2">
+            <h5><strong>Format image :</strong></h5>
+        </div>
+        <div class="col-2">
             <h5><strong>Image :</strong></h5>
         </div>
     </div>
 </div>
+<hr>
 <div class="container-fluid">
 {% for product in products %}
     <div class="row">
-        <div class="col-6">
+        <div class="col-2">
             <h5>{{ product.title }}</h5>
         </div>
         <div class="col-3">
             <h5>{{ product.brochureFilename }}</h5>
-            <a href="{{ asset('uploads/brochures/' ~ product.brochureFilename) }}">View brochure (PDF)</a>>
         </div>
         <div class="col-3">
+            <a class="btn btn-warning" href="{{ asset('uploads/brochures/' ~ product.brochureFilename) }}">View brochure (PDF)</a>
+        </div>
+        <div class="col-2">
             <h5>{{ product.image }}</h5>
-            <a href="{{ asset('uploads/images/' ~ product.image) }}">View image)</a>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-warning" href="{{ asset('uploads/images/' ~ product.image) }}">View image)</a>
         </div>
     </div>
     <hr>

@@ -134,7 +134,7 @@ class AdminController extends AbstractController
                     'label' => false,
                     'choices' => [
                         'Admin' => 'ROLE_ADMIN',
-                        'Super' => 'ROLE_SUPER_ADMIN',
+                        'Super admin' => 'ROLE_SUPER_ADMIN',
                         'User' => 'ROLE_USER'
                     ],
                 ],

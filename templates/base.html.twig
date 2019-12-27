@@ -68,6 +68,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('easyadmin') }}" target="blank" tabindex="-1" aria-disabled="true">Admin</a>
                 </li>
+                {% endif %}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('admin_index') }} ">Index admin</a>
                 </li>

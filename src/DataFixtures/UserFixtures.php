@@ -22,14 +22,14 @@ class UserFixtures extends Fixture
         
         $user = new User();
 
-        $role = ['ROLE_ADMIN'];
+        $role = ['ROLE_SUPER_ADMIN'];
 
-        $user->setEmail('toto@toto.com')
+        $user->setEmail('nuzzo.marcel@aliceadsl.fr')
              ->setPassword($this->encoder->encodePassword(
                     $user,
                     '1234'
                 ))
-             ->setUsername('toto')
+             ->setUsername('marcel')
              ->setRoles($role);
 
              $manager->persist($user);

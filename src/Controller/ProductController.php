@@ -57,24 +57,7 @@ class ProductController extends AbstractController
                 $fileNom
             );
             $product->setImage($fileNom);
-            /*
-            $imageFile = $form['image']->getData();
-            if($imageFile) {
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $newFilenameImage = uniqid().'.'.$imageFile->guessExtension();
-                try {
-                    $imageFile->move(
-                        $this->getParameter('images_directory'),
-                        $newFilenameImage
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                    $this->logger->error('failed to upload image: ' . $e->getMessage());
-                }
-                $product->setImage($newFilenameImage);
-            }
-            */
-
+           
             $manager->persist($product);         
             $manager->flush();
             // ... persist the $product variable or any other work
@@ -88,7 +71,6 @@ class ProductController extends AbstractController
         ]);
     }
     
-
     /**
      * @Route("/product/list", name="app_product_list")
      */
@@ -96,10 +78,13 @@ class ProductController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(Product::class);
         $products = $repo->findAll();
+        $repo1 = $this->getDoctrine()->getRepository(Product::class);
+        $product = $repo1->findAll();
 
         return $this->render('product/list.html.twig', [
             'controller_name' => 'ProductController',
             'products'=> $products,
+            'product' => $product,
         ]);
     }
 

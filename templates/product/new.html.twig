@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création product !{% endblock %}
+
+{% block body %}
+
+<div class = "jumbotron">
+    <h1>Adding a new product</h1>
+</div>
+
+{{ form_start(form) }}
+    {# ... #}
+    {{ form_row(form.title) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.brochure) }}
+    <div class=" mx-auto d-block">
+        <button type="submit" class="btn btn-success">Créer un produit</button>
+    </div>
+{{ form_end(form) }}
+
+{% endblock %}

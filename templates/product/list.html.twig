@@ -35,7 +35,7 @@
         <div class="col-2">
             <h5>{{ product.title }}</h5>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <div class="d-inline-block">
                 <i class="fa fa-file-text-o"></i>
             </div>
@@ -44,7 +44,7 @@
                 <p>{{ product.brochureFilename }}</p>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <a class="btn btn-warning" href="{{ asset('uploads/brochures/' ~ product.brochureFilename) }}">View brochure (PDF)</a>
         </div>
         <div class="col-2">
@@ -58,6 +58,9 @@
             <div class="d-inline-block">
                 <a class="btn btn-warning" href="{{ asset('uploads/images/' ~ product.image) }}">View image)</a>
             </div>
+        </div>
+        <div class="col-2">
+            <strong>{{ product.createdAt | date('d/m/Y)') }}</strong> à {{ product.createdAt | date  ('H:i') }}
         </div>
     </div>
     <hr>

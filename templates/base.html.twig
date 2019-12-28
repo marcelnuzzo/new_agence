@@ -17,6 +17,24 @@
     .gi-3x{font-size: 3em;}
     .gi-4x{font-size: 4em;}
     .gi-5x{font-size: 5em;}
+
+    /* Fonction Heure */
+function dsptime() {
+    var heure;
+    date = new Date();
+    h = date.getHours();
+    m = date.getMinutes();
+    s = date.getSeconds();
+    hh = date.getHours();
+    h = h > 12 ? h % 12 : h;
+  
+    heure = (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s + (hh < 12 ? ' am' : ' pm');
+    
+    document.querySelector('#time').innerHTML = heure;
+    
+    return heure;
+  }
+  dsptime();
         
     </style>
     <body>
@@ -106,6 +124,15 @@
     </body>
     <!-- Footer -->
         <footer class="footer">
+        <div class="row">
+			<div class="col-3 date">
+				Le : {{ "now" | date('d') }} </br>heure : {{ "now" | date('h:i') }}</br> {{ ' - Jour : ' ~ "now" | date('D') }} {{ ' - Semaine : ' ~ "now" | date('W')  ~ '  || ' }} 
+				<i class="fa fa-clock-o"></i><span id="time"></span>
+			</div>
+			<div class="col-6 text-center titre">
+				{{ '©' | raw }} {{ 'Copyright ' ~ "now" | date("Y") ~ ' - Boom Social NetWork. Tous droits Réservés.' }}
+			</div>
+		</div>
         <div class="text-white-50 bg-primary">
         <!-- Copyright -->
             <div class="footer-copyright text-center py-3">© 2019 Copyright:
@@ -114,5 +141,6 @@
         <!-- Copyright -->
         </div>
         </footer>
+        <script src="/js/date.js"></script>
     <!-- Footer -->
 </html>

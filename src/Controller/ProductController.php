@@ -25,6 +25,9 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if(!$product->getId()) {
+                $product->setCreatedAt(new \DateTime('now'));
+            }
             
             $brochureFile = $form['brochure']->getData();
             // this condition is needed because the 'brochure' field is not required

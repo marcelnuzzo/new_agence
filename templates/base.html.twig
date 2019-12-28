@@ -13,30 +13,28 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <style>
-    .gi-2x{font-size: 2em;}
-    .gi-3x{font-size: 3em;}
-    .gi-4x{font-size: 4em;}
-    .gi-5x{font-size: 5em;}
-
-    /* Fonction Heure */
-function dsptime() {
-    var heure;
-    date = new Date();
-    h = date.getHours();
-    m = date.getMinutes();
-    s = date.getSeconds();
-    hh = date.getHours();
-    h = h > 12 ? h % 12 : h;
-  
-    heure = (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s + (hh < 12 ? ' am' : ' pm');
+        .gi-2x{font-size: 2em;}
+        .gi-3x{font-size: 3em;}
+        .gi-4x{font-size: 4em;}
+        .gi-5x{font-size: 5em;}
+   </style>
+   <script>
+        /* Fonction Heure */
+        function dsptime() {
+            var heure;
+            date = new Date();
+            h = date.getHours();
+            m = date.getMinutes();
+            s = date.getSeconds();
+            hh = date.getHours();
+            h = h > 24 ? h % 24 : h;
+            heure = (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s ;         
+            document.querySelector('#time').innerHTML = heure;
+            return heure;
+        }
+         setInterval(dsptime, 1000);
+  </script>
     
-    document.querySelector('#time').innerHTML = heure;
-    
-    return heure;
-  }
-  dsptime();
-        
-    </style>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div>
@@ -47,7 +45,6 @@ function dsptime() {
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -124,17 +121,12 @@ function dsptime() {
     </body>
     <!-- Footer -->
         <footer class="footer">
-        <div class="row">
-			<div class="col-3 date">
-				Le : {{ "now" | date('d') }} </br>heure : {{ "now" | date('h:i') }}</br> {{ ' - Jour : ' ~ "now" | date('D') }} {{ ' - Semaine : ' ~ "now" | date('W')  ~ '  || ' }} 
-				<i class="fa fa-clock-o"></i><span id="time"></span>
-			</div>
-			<div class="col-6 text-center titre">
-				{{ '©' | raw }} {{ 'Copyright ' ~ "now" | date("Y") ~ ' - Boom Social NetWork. Tous droits Réservés.' }}
-			</div>
-		</div>
         <div class="text-white-50 bg-primary">
         <!-- Copyright -->
+			<div class="text-center">
+                <i class="fa fa-clock-o gi-3x"></i><span id="time"></span>&nbsp&nbsp&nbsp&nbsp</br>
+				{{ "now" | date("Y-m-d") }} 
+			</div>
             <div class="footer-copyright text-center py-3">© 2019 Copyright:
                 <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
             </div>

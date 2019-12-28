@@ -36,7 +36,13 @@
             <h5>{{ product.title }}</h5>
         </div>
         <div class="col-3">
-            <h5>{{ product.brochureFilename }}</h5>
+            <div class="d-inline-block">
+                <i class="fa fa-file-text-o"></i>
+            </div>
+            &nbsp&nbsp
+            <div class="d-inline-block">
+                <p>{{ product.brochureFilename }}</p>
+            </div>
         </div>
         <div class="col-3">
             <a class="btn btn-warning" href="{{ asset('uploads/brochures/' ~ product.brochureFilename) }}">View brochure (PDF)</a>
@@ -45,7 +51,13 @@
             <h5>{{ product.image }}</h5>
         </div>
         <div class="col-2">
-            <a class="btn btn-warning" href="{{ asset('uploads/images/' ~ product.image) }}">View image)</a>
+            <div class="d-inline-block">
+                <i class="fa fa-file-image-o"></i>
+            </div>
+            &nbsp&nbsp
+            <div class="d-inline-block">
+                <a class="btn btn-warning" href="{{ asset('uploads/images/' ~ product.image) }}">View image)</a>
+            </div>
         </div>
     </div>
     <hr>

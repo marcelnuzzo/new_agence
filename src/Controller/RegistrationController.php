@@ -36,7 +36,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail();
+            $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail().'</br>'."Vous êtes inscrit";
 
             $message = (new \Swift_Message('Agence3'))
                         ->setFrom('nuzzomarcel358@gmail.com')

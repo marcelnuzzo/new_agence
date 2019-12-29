@@ -4,12 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
-use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -45,7 +42,6 @@ class ProductController extends AbstractController
                     );
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
-                    $this->logger->error('failed to upload image: ' . $e->getMessage());
                     throw new FileException('Failed to upload file');
                 }
 
@@ -53,6 +49,30 @@ class ProductController extends AbstractController
                 // instead of its contents
                 $product->setBrochureFilename($newFilename);
             }
+
+            $imageFile = $form['image']->getData();
+            if($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII;Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+                // Move the file to the directory where brochures are stored
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                    $this->logger->error('failed to upload image: ' . $e->getMessage());
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $product->setImage($newFilename);
+            }
+
+            /*
             $fileImage = $product->getImage();
             $fileNom = $fileImage->guessExtension();
             $fileImage->move(
@@ -60,7 +80,7 @@ class ProductController extends AbstractController
                 $fileNom
             );
             $product->setImage($fileNom);
-           
+            */
             $manager->persist($product);         
             $manager->flush();
             // ... persist the $product variable or any other work

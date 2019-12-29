@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-//use App\Form\RegistrationFormType;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -125,7 +124,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/editRole/{id}", name="admin_editRole")
      */
-    public function editRole(User $user, Request $request, EntityManagerInterface $manager) 
+    public function editRole(\Swift_Mailer $mailer,User $user, Request $request, EntityManagerInterface $manager) 
     {
         $form = $this->createFormBuilder($user)
             ->add('roles', CollectionType::class, [
@@ -145,6 +144,17 @@ class AdminController extends AbstractController
             if($form->isSubmitted() && $form->isValid()) {
                 $manager->persist($user);         
                 $manager->flush();
+                $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail().'</br>'."Vous avez le role de : ".$user->getRoles()[0];
+                //dd($user->getRoles()[0]);
+                
+                $message = (new \Swift_Message('Agence3'))
+                            ->setFrom('nuzzomarcel358@gmail.com')
+                            ->setTo('nuzzo.marcel@aliceadsl.fr')
+                            ->setBody($body,
+                                    'text/html'
+                                );
+                                
+                $mailer->send($message);
                 return $this->redirectToRoute('admin_listeRole',['id' => $user->getId()
                 ]);
             }

@@ -9,14 +9,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
-     * @Route("/", name="home")
+     * 
+     * @Route("/", name="index")
      */
     public function index()
     {
         $repo = $this->getDoctrine()->getRepository(User::class);
         $users = $repo->findAll();
         return $this->render('home/index.html.twig', [
+            'controller_name' => 'HomeController',
+            'users' => $users
+        ]);
+    }
+
+     /**
+     * @Route("/home", name="home")
+     *
+     */
+    public function home()
+    {
+        $repo = $this->getDoctrine()->getRepository(User::class);
+        $users = $repo->findAll();
+        return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
             'users' => $users
         ]);

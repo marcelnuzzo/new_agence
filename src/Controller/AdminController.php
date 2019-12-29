@@ -15,6 +15,7 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Service\envoiMail;
 
 class AdminController extends AbstractController
 {
@@ -45,7 +46,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/editUser/{id}", name="admin_editUser")
      */
-    public function formUser( \Swift_Mailer $mailer,  Request $request, EntityManagerInterface $manager, User $user, UserPasswordEncoderInterface $encoder, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): response
+    public function formUser(EnvoiMail $envoiMail, \Swift_Mailer $mailer,  Request $request, EntityManagerInterface $manager, User $user, UserPasswordEncoderInterface $encoder): response
     {
         
         $form = $this->createFormBuilder($user)
@@ -67,14 +68,8 @@ class AdminController extends AbstractController
             $manager->persist($user);         
             $manager->flush();
             
-            $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail();
-
-            $message = (new \Swift_Message('Agence3'))
-                        ->setFrom('nuzzomarcel358@gmail.com')
-                        ->setTo('nuzzo.marcel@aliceadsl.fr')
-                        ->setBody($body,
-                                'text/html'
-                            );
+            $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail().'</br>'."Utilisateur modifié";
+            $message = $envoiMail->envoi($body);
             $mailer->send($message);
             $this->addFlash('warning', 'Votre compte à bien été modifié.');
 
@@ -124,7 +119,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/editRole/{id}", name="admin_editRole")
      */
-    public function editRole(\Swift_Mailer $mailer,User $user, Request $request, EntityManagerInterface $manager) 
+    public function editRole(\Swift_Mailer $mailer,User $user, Request $request, EntityManagerInterface $manager, envoiMail $envoiMail) 
     {
         $form = $this->createFormBuilder($user)
             ->add('roles', CollectionType::class, [
@@ -144,17 +139,11 @@ class AdminController extends AbstractController
             if($form->isSubmitted() && $form->isValid()) {
                 $manager->persist($user);         
                 $manager->flush();
-                $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail().'</br>'."Vous avez le role de : ".$user->getRoles()[0];
-                //dd($user->getRoles()[0]);
                 
-                $message = (new \Swift_Message('Agence3'))
-                            ->setFrom('nuzzomarcel358@gmail.com')
-                            ->setTo('nuzzo.marcel@aliceadsl.fr')
-                            ->setBody($body,
-                                    'text/html'
-                                );
-                                
+                $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail().'</br>'."Vous avez le role de : ".$user->getRoles()[0];          
+                $message = $envoiMail->envoi($body);
                 $mailer->send($message);
+                
                 return $this->redirectToRoute('admin_listeRole',['id' => $user->getId()
                 ]);
             }

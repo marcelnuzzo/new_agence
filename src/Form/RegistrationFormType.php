@@ -20,7 +20,7 @@ class RegistrationFormType extends AbstractType
             ->add('username')
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'Se rappeler de moi',
+                'label' => 'Remember me',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -31,7 +31,7 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'label' => 'Mot de passe',
+                'label' => 'Password',
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([

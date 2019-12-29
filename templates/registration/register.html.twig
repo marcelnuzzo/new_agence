@@ -13,9 +13,18 @@
     
     <div class="container">
         {{ form_start(registrationForm) }}
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-user gi-2x"></i>&nbsp&nbsp&nbsp</span>
             {{ form_row(registrationForm.username, {'attr': {'placeholder': "Nom de l'utilisateur"}} ) }}
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-envelope gi-2x"></i>&nbsp&nbsp&nbsp</span>
             {{ form_row(registrationForm.email, {'attr': {'placeholder': "Email de l'utilisateur"}} ) }}
+        </div>
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-key gi-2x"></i>&nbsp&nbsp&nbsp</span>
             {{ form_row(registrationForm.plainPassword, {'attr': {'placeholder': "Mot de passe de l'utilisateur"}} ) }}
+        </div>
             {{ form_row(registrationForm.agreeTerms, {'attr': {'label': "Se rappeler de moi"}} ) }}
             
             <button class="btn btn-info">Register</button>

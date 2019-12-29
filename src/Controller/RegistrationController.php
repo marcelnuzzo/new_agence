@@ -11,13 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use App\Service\envoiMail;
 
 class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(\Swift_Mailer $mailer,Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): Response
+    public function register(EnvoiMail $envoiMail, \Swift_Mailer $mailer,Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -38,16 +39,9 @@ class RegistrationController extends AbstractController
 
             $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail().'</br>'."Vous êtes inscrit";
 
-            $message = (new \Swift_Message('Agence3'))
-                        ->setFrom('nuzzomarcel358@gmail.com')
-                        ->setTo('nuzzo.marcel@aliceadsl.fr')
-                        ->setBody($body,
-                                'text/html'
-                            );
+            $message = $envoiMail->envoi($body);
             $mailer->send($message);
             $this->addFlash('success', 'Votre compte à bien été enregistré, un mail de confirmation vous sera envoyé dans les plus bref délais.');
-
-            // do anything else you need here, like send an email
             
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

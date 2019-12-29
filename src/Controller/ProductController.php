@@ -72,18 +72,8 @@ class ProductController extends AbstractController
                 $product->setImage($newFilename);
             }
 
-            /*
-            $fileImage = $product->getImage();
-            $fileNom = $fileImage->guessExtension();
-            $fileImage->move(
-                $this->getParameter('images_directory'),
-                $fileNom
-            );
-            $product->setImage($fileNom);
-            */
             $manager->persist($product);         
             $manager->flush();
-            // ... persist the $product variable or any other work
 
             return $this->redirect($this->generateUrl('app_product_list'));
         }

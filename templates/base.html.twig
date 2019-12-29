@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
     <head>
-         <meta charset="UTF-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Immo agence{% endblock %}</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+            <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+            <link rel="stylesheet"  href="{{ asset('css/main.css') }}"> 
+            <link rel="stylesheet"  href="{{ asset('js/main.js') }}"> 
+        {% endblock %}
     </head>
-    <style>
-        .gi-2x{font-size: 2em;}
-        .gi-3x{font-size: 3em;}
-        .gi-4x{font-size: 4em;}
-        .gi-5x{font-size: 5em;}
-   </style>
-   <script>
+    <script>
         /* Fonction Heure */
         function dsptime() {
             var heure;
@@ -32,8 +26,8 @@
             document.querySelector('#time').innerHTML = heure;
             return heure;
         }
-         setInterval(dsptime, 1000);
-  </script>
+        setInterval(dsptime, 1000);  
+    </script>
     
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -96,6 +90,7 @@
                 {% endif %}
             </ul>
         </nav>
+
         {% for message in app.flashes('success') %}
             <div class="alert alert-success" style="text-align:center">
                 {{ message }}
@@ -114,12 +109,9 @@
         <div class="container">
             {% block body %}{% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
-    </body>
-    <!-- Footer -->
+        
         <footer class="footer">
         <div class="text-white-50 bg-primary">
-        <!-- Copyright -->
 			<div class="text-center">
                 <i class="fa fa-clock-o gi-3x"></i>&nbsp&nbsp&nbsp&nbsp<span id="time"></span></br>
 				{{ "now" | date("Y-m-d") }} 
@@ -127,9 +119,14 @@
             <div class="footer-copyright text-center py-3">© 2019 Copyright:
                 <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
             </div>
-        <!-- Copyright -->
         </div>
         </footer>
-        <script src="/js/date.js"></script>
-    <!-- Footer -->
+
+        {% block javascripts %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+            <script src="/js/date.js"></script>
+        {% endblock %}    
+    </body>
 </html>

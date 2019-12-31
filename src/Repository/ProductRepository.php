@@ -47,4 +47,14 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findOneBySearch($key)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.title LIKE :key')
+            ->setParameter('key', '%' . $key . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Search;
+use App\Entity\Product;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
@@ -36,4 +40,36 @@ class HomeController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("search", name="search")
+     */
+    public function search(Request $request)
+    {
+           
+        $repo = $this->getDoctrine()->getRepository(Product::class);
+        $products = $repo->findAll();
+
+        $searches = new Search();
+        $form = $this->createFormBuilder($searches)
+                     ->add('titleProduct',TextType::class, [
+                         'label' => 'Titre du produit'
+                     ])
+                     ->getForm();
+
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()) {
+                
+                $key = $form['titleProduct']->getData();
+                $searches = $this->getDoctrine()->getRepository(Product::class)->findOneBySearch($key);  
+                
+            }
+            return $this->render('home/search.html.twig', [
+                'controller_name' => 'HomeController',
+                'formSearch' => $form->createView(),
+                'searches' =>  $searches,
+                'products' => $products,
+            ]);
+
+    }
 }

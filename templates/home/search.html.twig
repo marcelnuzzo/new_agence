@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}/search{% endblock %}
+
+{% block body %}
+
+<div class = "jumbotron" style="background-color:cyan">
+    <h1>Recherche d'un produit</h1>
+        {{ form_start(formSearch) }}
+        {{ form_row(formSearch.titleProduct, {'attr': {'placeholder': "Occurrence d'un produit"}}) }}
+        <button type="submit" class="btn btn-info">Recherche</button>
+        {{ form_end(formSearch) }}
+</div>
+<img scr="/public/image/car.jpg" alt="">  
+<div> 
+    {% for search in searches %}
+        <p>{{ search.title }}</p>
+        <hr>
+    {% endfor %}
+</div>
+    
+{% endblock %}

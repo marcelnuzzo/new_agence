@@ -42,9 +42,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_product_new') }} ">Créer produit</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_product_list') }} ">Liste produit</a>
                 </li>
                 <li class="nav-item">
@@ -82,6 +79,9 @@
                 </li>
                 {% endif %}
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_product_new') }} ">Créer produit</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('admin_index') }} ">Index admin</a>
                 </li>

@@ -14,17 +14,17 @@
         <div class="col-2">
             <h5><strong>Titre :</strong></h5>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <h5><strong>lien PDF :</strong></h5>
         </div>
-        <div class="col-3">
+        <div class="col-2">
             <h5><strong>PDF :</strong></h5>
         </div>
          <div class="col-2">
             <h5><strong>Format image :</strong></h5>
         </div>
-        <div class="col-2">
-            <h5><strong>Image :</strong></h5>
+        <div class="col-4">
+            <h5><strong>Achat :</strong></h5>
         </div>
     </div>
 </div>
@@ -44,11 +44,8 @@
             </div>
             &nbsp&nbsp
             <div class="d-inline-block">
-                <a class="btn btn-warning" href="{{ asset('uploads/brochures/' ~ product.brochureFilename) }}">Voir PDF</a>
+                <a class="btn btn-info" href="{{ asset('uploads/brochures/' ~ product.brochureFilename) }}">Voir PDF</a>
             </div>
-        </div>
-        <div class="col-2">
-            <h5>{{ product.image }}</h5>
         </div>
         <div class="col-2">
             <div class="d-inline-block">
@@ -56,11 +53,11 @@
             </div>
             &nbsp&nbsp
             <div class="d-inline-block">
-                <a class="btn btn-warning" href="{{ asset('uploads/images/' ~ product.image) }}">Voir image)</a>
+                <a class="btn btn-info" href="{{ asset('uploads/images/' ~ product.image) }}">Voir image)</a>
             </div>
         </div>
-        <div class="col-2">
-            <strong>{{ product.createdAt | date('d/m/Y)') }}</strong> à {{ product.createdAt | date  ('H:i') }}
+        <div class="col-4">
+            <a class="btn btn-success" style="color:white" href="#" role="button" >Commander</a>
         </div>
     </div>
     <hr>

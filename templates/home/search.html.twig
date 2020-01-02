@@ -14,7 +14,9 @@
 <img scr="/public/image/car.jpg" alt="">  
 <div> 
     {% for search in searches %}
-        <p>{{ search.title }}</p>
+        <ul>
+            <li><p>{{ search.title }}</p></li>
+        </ul>
         <hr>
     {% endfor %}
 </div>

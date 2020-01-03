@@ -38,7 +38,6 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             $body="Username : ".$user->getUsername().'</br>'."Email : ".$user->getEmail().'</br>'."Vous êtes inscrit";
-
             $message = $envoiMail->envoi($body);
             $mailer->send($message);
             $this->addFlash('success', 'Votre compte à bien été enregistré, un mail de confirmation vous sera envoyé dans les plus bref délais.');

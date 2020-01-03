@@ -24,7 +24,7 @@
             {% for item in items %}
                 <tr>
                     <td>{{ item.product.title }}</td>
-                    <td><img src=" https://lorempixel.com/400/200/?43360 " alt="" width="220"></td>
+                    <td>{{ item.product.image }}</td>
                     <td>{{ item.product.price }}</td>
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.product.price * item.quantity }}</td>

@@ -37,9 +37,9 @@ class Product
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="products")
+     * @ORM\Column(type="integer")
      */
-    private $user;
+    private $price;
 
     public function getId(): ?int
     {
@@ -94,15 +94,16 @@ class Product
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getPrice(): ?int
     {
-        return $this->user;
+        return $this->price;
     }
 
-    public function setUser(?User $user): self
+    public function setPrice(int $price): self
     {
-        $this->user = $user;
+        $this->price = $price;
 
         return $this;
     }
+
 }

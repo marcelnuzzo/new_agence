@@ -13,7 +13,6 @@
         <thead>
             <tr>
                 <th>Produit</th>
-                <th>Image</th>
                 <th>Prix</th>
                 <th>Quantité</th>
                 <th>Total</th>
@@ -24,26 +23,17 @@
             {% for item in items %}
                 <tr>
                     <td>{{ item.product.title }}</td>
-                    <td>{{ item.product.image }}</td>
                     <td>{{ item.product.price }}</td>
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.product.price * item.quantity }}</td>
                     <td>
-                        <a href="{{ path('product_remove', {'id': item.product.id }) }}" class="btn btn-danger btn-sm">
-                            Supprimer
+                        <a href="" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
                         </a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3" class="text-right">Total :
-                </td>
-                <td>{{ total }}</td>
-                <td></td>
-            </tr>
-        </tfoot>
     </table>
 {% else %}
     <p>Vide</p>

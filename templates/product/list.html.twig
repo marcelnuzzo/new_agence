@@ -15,7 +15,7 @@
             <h5><strong>Titre :</strong></h5>
         </div>
         <div class="col-2">
-            <h5><strong>lien PDF :</strong></h5>
+            <h5><strong>Prix :</strong></h5>
         </div>
         <div class="col-2">
             <h5><strong>PDF :</strong></h5>
@@ -24,7 +24,7 @@
             <h5><strong>Format image :</strong></h5>
         </div>
         <div class="col-4">
-            <h5><strong>Achat :</strong></h5>
+            <h5><strong>Panier :</strong></h5>
         </div>
     </div>
 </div>
@@ -36,7 +36,7 @@
             <h5>{{ product.title }}</h5>
         </div>
         <div class="col-2">
-            <p>{{ product.brochureFilename }}</p>
+            <p>{{ product.price }}</p>
         </div>
         <div class="col-2">
             <div class="d-inline-block">
@@ -56,9 +56,15 @@
                 <a class="btn btn-info" href="{{ asset('uploads/images/' ~ product.image) }}">Voir image)</a>
             </div>
         </div>
+        {% if app.user %}
         <div class="col-4">
-            <a class="btn btn-success" style="color:white" href="#" role="button" >Commander</a>
+            <a class="btn btn-success" style="color:white" href="{{ path('product_add', { 'id': product.id }) }}" role="button" >Ajouter</a>
         </div>
+        {% else %}
+        <div class="col-4">
+            <a class="btn btn-success disabled" style="color:white" href="{{ path('product_panier') }}" role="button" >Ajouter</a>
+        </div>
+        {% endif %}
     </div>
     <hr>
 {% endfor %}

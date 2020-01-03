@@ -24,7 +24,7 @@
             {% for item in items %}
                 <tr>
                     <td>{{ item.product.title }}</td>
-                    <td>{{ item.product.image }}</td>
+                    <td><img src=" https://lorempixel.com/400/200/?43360 " alt="" width="220"></td>
                     <td>{{ item.product.price }}</td>
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.product.price * item.quantity }}</td>
@@ -38,7 +38,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-right">Total :
+                <td colspan="4" class="text-right">Total :
                 </td>
                 <td>{{ total }}</td>
                 <td></td>

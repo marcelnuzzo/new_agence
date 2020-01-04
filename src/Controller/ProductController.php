@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
+
 class ProductController extends AbstractController
 {
 
@@ -75,6 +76,7 @@ class ProductController extends AbstractController
             }
 
             $imageFile = $form['image']->getData();
+            //dd($imageFile->getClientOriginalName());
             
             if($imageFile) {
                 $originalFilenameIm = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);

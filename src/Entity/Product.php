@@ -41,6 +41,11 @@ class Product
      */
     private $price;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageimage;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class Product
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getImageimage(): ?string
+    {
+        return $this->imageimage;
+    }
+
+    public function setImageimage(?string $imageimage): self
+    {
+        $this->imageimage = $imageimage;
 
         return $this;
     }

@@ -21,6 +21,7 @@ class ProductController extends AbstractController
      */
     public function index(ProductService $productService)
     {
+        
         return $this->render('product/index.html.twig', [
             'items' => $productService->getFullProduct(),
             'total' => $productService->getTotal(),

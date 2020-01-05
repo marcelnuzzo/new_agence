@@ -8,11 +8,32 @@
             <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
             <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
             <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="http://maps.googleapis.com/"> 
             <link rel="stylesheet"  href="{{ asset('css/main.css') }}"> 
             <link rel="stylesheet"  href="{{ asset('js/main.js') }}"> 
         {% endblock %}
     </head>
+    <style>
+        #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
     <script>
+      
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 8
+            });
+        }
+   
         /* Fonction Heure */
         function dsptime() {
             var heure;
@@ -133,6 +154,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
             <script src="/js/date.js"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"async defer></script>
         {% endblock %}    
     </body>
 </html>

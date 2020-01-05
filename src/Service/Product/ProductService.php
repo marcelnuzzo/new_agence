@@ -25,6 +25,7 @@ class ProductService {
         else {
             $panier[$id] = 1;
         }
+       
         $this->session->set('panier', $panier);
     }
 
@@ -37,6 +38,21 @@ class ProductService {
 
         $this->session->set('panier', $panier);
     }
+
+    
+    public function removeAll() {
+        $panier = $this->session->get('panier', []);
+
+        
+            foreach($panier as $value) {
+                unset($panier[$value]);
+                $value++;
+            }
+        
+
+        $this->session->set('panier', $panier);
+    }
+    
 
     public function getFullProduct() : array {
         $panier = $this->session->get('panier', []);

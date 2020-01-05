@@ -29,7 +29,7 @@
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.product.price * item.quantity }}</td>
                     <td>
-                        <a href="{{ path('product_remove', {'id': item.product.id }) }}" class="btn btn-danger btn-sm">
+                        <a href="{{ path('product_remove', {'id': item.product.id }) }}" class="btn btn-warning btn-sm">
                             Supprimer
                         </a>
                     </td>
@@ -41,7 +41,11 @@
                 <td colspan="4" class="text-right">Total :
                 </td>
                 <td>{{ total }}</td>
-                <td></td>
+                <td>
+                    <a href="{{ path('product_removeAll') }}" class="btn btn-danger btn-sm">
+                        Supprimer tout
+                    </a>
+                </td>
             </tr>
         </tfoot>
     </table>

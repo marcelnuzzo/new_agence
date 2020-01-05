@@ -39,6 +39,16 @@ class ProductController extends AbstractController
     }
 
     /**
+     * @Route("/panier/removeAll", name="product_removeAll")
+     */
+    public function removeAll( ProductService $productService) {
+        
+        $productService->removeAll();
+
+        return $this->redirectToRoute("product_index");
+    }
+
+    /**
     * @Route("/product/new", name="app_product_new")
     */
     public function new(Request $request, EntityManagerInterface $manager)
@@ -138,7 +148,7 @@ class ProductController extends AbstractController
     public function add($id, ProductService $productService)
     {
         $productService->add($id);
-
+        
         return $this->redirectToRoute("product_index");
     }
 

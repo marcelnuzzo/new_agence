@@ -13,6 +13,7 @@
         <thead>
             <tr>
                 <th>Produit</th>
+                <th>Image</th>
                 <th>Prix</th>
                 <th>Quantité</th>
                 <th>Total</th>
@@ -23,19 +24,39 @@
             {% for item in items %}
                 <tr>
                     <td>{{ item.product.title }}</td>
+                    <td><img src="{{ asset('uploads/images/' ~ item.product.image) }}" alt="" width="100"></td>
                     <td>{{ item.product.price }}</td>
                     <td>{{ item.quantity }}</td>
                     <td>{{ item.product.price * item.quantity }}</td>
                     <td>
-                        <a href="" class="btn btn-danger btn-sm">
-                            <i class="fas fa-trash"></i>
+                        <a href="{{ path('product_remove', {'id': item.product.id }) }}" class="btn btn-warning btn-sm">
+                            Supprimer
                         </a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-right">Total :
+                </td>
+                <td>{{ total }}</td>
+                <td>
+                    <a href="{{ path('product_removeAll') }}" class="btn btn-danger btn-sm">
+                        Supprimer tout
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
     </table>
+    <div>
+        <a href="#" class="btn btn-success btn-sm">
+            Valider commande
+        </a>
+    </div>
 {% else %}
-    <p>Vide</p>
+    <div class = "jumbotron">
+        <h1 style="text-align:center; background-color:yellow; text-decoration:underline">Votre Panier est vide</h1>
+    </div> 
 {% endif %}
 {% endblock %}

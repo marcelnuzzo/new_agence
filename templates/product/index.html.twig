@@ -49,7 +49,14 @@
             </tr>
         </tfoot>
     </table>
+    <div>
+        <a href="#" class="btn btn-success btn-sm">
+            Valider commande
+        </a>
+    </div>
 {% else %}
-    <p>Vide</p>
+    <div class = "jumbotron">
+        <h1 style="text-align:center; background-color:yellow; text-decoration:underline">Votre Panier est vide</h1>
+    </div> 
 {% endif %}
 {% endblock %}

@@ -34,7 +34,6 @@ class ProductController extends AbstractController
     public function remove($id, ProductService $productService) {
         
         $productService->remove($id);
-
         return $this->redirectToRoute("product_index");
     }
 
@@ -44,7 +43,6 @@ class ProductController extends AbstractController
     public function removeAll( ProductService $productService) {
         
         $productService->removeAll();
-
         return $this->redirectToRoute("product_index");
     }
 
@@ -137,9 +135,12 @@ class ProductController extends AbstractController
     /**
      * @Route("/product/panier", name="product_panier")
      */
-    public function panier()
+    public function panier(ProductService $productService)
     {
-        return $this->render('product/panier.html.twig', []);
+        return $this->render('product/panier.html.twig', [
+            'items' => $productService->getFullProduct(),
+            'total' => $productService->getTotal(),
+        ]);
     }
 
     /**
